@@ -4,7 +4,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="alyngee.github.io/style1.css>
 </head> 
-css">
   <script>
   /*
  *   This content is licensed according to the W3C Software License at
@@ -51,6 +50,32 @@ class DisclosureNav {
       // handle links
       else {
         this.controlledNodes.push(null);
+        node.addEventListener('keydown', this.onLinkKeyDown.bind(this));
+      }
+    });
+
+    this.rootNode.addEventListener('focusout', this.onBlur.bind(this));
+  }
+
+  controlFocusByKey(keyboardEvent, nodeList, currentIndex) {
+    switch (keyboardEvent.key) {
+      case 'ArrowUp':
+      case 'ArrowLeft':
+        keyboardEvent.preventDefault();
+        if (currentIndex > -1) {
+          var prevIndex = Math.max(0, currentIndex - 1);
+          nodeList[prevIndex].focus();
+        }
+        break;
+      case 'ArrowDown':
+      case 'ArrowRight':
+        keyboardEvent.preventDefault();
+        if (currentIndex > -1) {
+          var nextIndex = Math.min(nodeList.length - 1, currentIndex + 1);
+          nodeList[nextIndex].focus();
+        }
+        break;
+      case 'Home':
 
 </script>
 <nav aria-label="Alyn">
