@@ -3,26 +3,48 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 ​
-.topnav {
-  overflow: hidden;
-  background-color: white;
+.disclosure-nav {
+  background-color: #eee;
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
-​
-.topnav a {
-  float: left;
-  color: black;
-  text-align: center;
-  padding: 14px 16px;
+
+.disclosure-nav ul {
+  background-color: #eee;
+  border: 1px solid #005a9c;
+  border-top-width: 5px;
+  border-radius: 0 0 4px 4px;
+  display: block;
+  list-style-type: none;
+  margin: 0;
+  min-width: 200px;
+  padding: 0;
+  position: absolute;
+  top: 100%;
+}
+
+.disclosure-nav li {
+  margin: 0;
+}
+
+.disclosure-nav > li {
+  display: flex;
+  position: relative;
+}
+
+.disclosure-nav ul a {
+  border: 0;
+  color: #000;
+  display: block;
+  margin: 0;
+  padding: 0.5em 1em;
+  text-decoration: underline;
+}
+
+.disclosure-nav ul a:hover,
+.disclosure-nav ul a:focus {
+  background-color: #ddd;
+  margin-bottom: 0;
   text-decoration: none;
-  font-size: 17px;
-}
-​
-.topnav a:hover {
-  background-color: #A3E4D7;
-  color: black;
-}
-​
-.topnav a.active {
-  background-color: #A3E4D7;
-  color: black;
-}
