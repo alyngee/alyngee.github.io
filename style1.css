@@ -87,7 +87,7 @@
 
 .disclosure-nav button:hover,
 .disclosure-nav button[aria-expanded="true"] {
-  background-color: #005a9c;
+  background-color: #80a689;
   color: #fff;
 }
 
@@ -107,8 +107,8 @@
 }
 
 .sample-header {
-  border: #005a9c solid 2px;
-  background: #005a9c;
+  border: #80a689 solid 2px;
+  background: #80a689;
   color: white;
   text-align: center;
 }
@@ -125,7 +125,7 @@
 
 .sample-footer {
   border: #005a9c solid 2px;
-  background: #005a9c;
+  background: #80a689;
   font-family: serif;
   color: white;
   font-style: italic;
