@@ -1,5 +1,5 @@
 .disclosure-nav {
-  background-color:  #ededed;
+  background-color:  #80a689;
   display: flex;
   list-style-type: none;
   padding: 0;
@@ -7,7 +7,7 @@
 }
 
 .disclosure-nav ul {
-  background-color:  #ededed;
+  background-color: #80a689;
   border: 1px solid #80a689;
   border-top-width: 5px;
   border-radius: 0 0 4px 4px;
