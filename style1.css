@@ -1,8 +1,3 @@
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
-​
 .disclosure-nav {
   background-color: #eee;
   display: flex;
@@ -48,3 +43,91 @@ body {
   background-color: #ddd;
   margin-bottom: 0;
   text-decoration: none;
+}
+
+.disclosure-nav ul a:focus {
+  outline: 5px solid rgb(0 90 156 / 75%);
+  position: relative;
+}
+
+.disclosure-nav button,
+.disclosure-nav .main-link {
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-right-color: #ccc;
+  display: flex;
+  padding: 1em;
+}
+
+.disclosure-nav .main-link {
+  border-right-color: transparent;
+}
+
+.disclosure-nav button::after {
+  content: "";
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+  height: 0.5em;
+  margin-left: 0.75em;
+  width: 0.5em;
+  transform: rotate(45deg);
+}
+
+.disclosure-nav .main-link + button::after {
+  margin-left: 0;
+}
+
+.disclosure-nav button:focus,
+.disclosure-nav .main-link:focus {
+  border-color: #005a9c;
+  outline: 5px solid rgb(0 90 156 / 75%);
+  position: relative;
+}
+
+.disclosure-nav button:hover,
+.disclosure-nav button[aria-expanded="true"] {
+  background-color: #005a9c;
+  color: #fff;
+}
+
+.disclosure-nav button:hover::after,
+.disclosure-nav button[aria-expanded="true"]::after {
+  border-color: #fff;
+}
+
+/* Styles for example page content section */
+.disclosure-page-content {
+  border: 1px solid #ccc;
+  padding: 1em;
+}
+
+.disclosure-page-content h3 {
+  margin-top: 0.5em;
+}
+
+.sample-header {
+  border: #005a9c solid 2px;
+  background: #005a9c;
+  color: white;
+  text-align: center;
+}
+
+.sample-header .title {
+  font-size: 2.5em;
+  font-weight: bold;
+  font-family: serif;
+}
+
+.sample-header .tagline {
+  font-style: italic;
+}
+
+.sample-footer {
+  border: #005a9c solid 2px;
+  background: #005a9c;
+  font-family: serif;
+  color: white;
+  font-style: italic;
+  padding-left: 1em;
+}
