@@ -8,7 +8,7 @@
 
 .disclosure-nav ul {
   background-color:  #ededed;
-  border: 1px solid #a680b0;
+  border: 1px solid #80a689;
   border-top-width: 5px;
   border-radius: 0 0 4px 4px;
   display: block;
@@ -124,7 +124,7 @@
 }
 
 .sample-footer {
-  border: #005a9c solid 2px;
+  border: #80a689 solid 2px;
   background: #80a689;
   font-family: serif;
   color: white;
