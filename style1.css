@@ -1,284 +1,102 @@
-@import "https://unpkg.com/open-props";
+/* This CSS originally written by https://codepen.io/samnorton/pen/zBYMJGt */
 
-/*------------------------------------*\
-  #RESET 
-\*------------------------------------*/
-/**
- * @see https://andy-bell.co.uk/a-modern-css-reset/
- */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+* {
+	box-sizing: border-box;
 }
-
-html:focus-within {
-  scroll-behavior: smooth;
-}
-
-body,
-h1,
-h2,
-h3,
-p {
-  margin: 0;
-}
-
 body {
-  min-height: 100vh;
-  text-rendering: optimizeSpeed;
-  line-height: 1.5;
+	font-family: 'Montserrat', sans-serif;
+	line-height: 1.6;
+	margin: 0;
+	min-height: 100vh;
 }
-
-h1,
-h2,
-h3 {
-  line-height: 1.1;
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
-
-ul[role="list"] {
+ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html:focus-within {
-    scroll-behavior: auto;
-  }
 
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+h2,
+h3,
+a {
+	color: #34495e;
 }
 
-/*------------------------------------*\
-  #GLOBAL 
-\*------------------------------------*/
-body {
-  font-family: Helvetica, system-ui, sans-serif;
-  font-size: 1rem;
+a {
+	text-decoration: none;
 }
 
-section {
-  padding-block: var(--size-fluid-4);
+
+
+.logo {
+	margin: 0;
+	font-size: 1.45em;
 }
 
-p:not([class]),
-li:not([class]) {
-  max-width: 60ch;
+.main-nav {
+	margin-top: 5px;
+
+}
+.logo a,
+.main-nav a {
+	padding: 10px 15px;
+	text-align: center;
+	display: block;
 }
 
-a[class] {
-  color: inherit;
-  text-decoration: none;
+.main-nav a {
+	color: #34495e;
+	font-size: .99em;
 }
 
-svg {
-  height: 4ex;
-  width: auto;
-  flex: none;
+.main-nav a:hover {
+	color: #718daa;
 }
 
-/*------------------------------------*\
-  #UTILITIES 
-\*------------------------------------*/
-.container {
-  --max-width: 60rem;
-  width: min(100% - 2rem, var(--max-width));
-  margin-inline: auto;
+
+
+.header {
+	padding-top: .5em;
+	padding-bottom: .5em;
+	border: 1px solid #a2a2a2;
+	background-color: #f4f4f4;
+	-webkit-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
 
-.flow > *:where(:not(:first-child)) {
-  margin-top: var(--flow-spacer, 1rem);
+
+/* ================================= 
+  Media Queries
+==================================== */
+
+
+
+
+@media (min-width: 769px) {
+	.header,
+	.main-nav {
+		display: flex;
+	}
+	.header {
+		flex-direction: column;
+		align-items: center;
+    	.header{
+		width: 80%;
+		margin: 0 auto;
+		max-width: 1150px;
+	}
+	}
+
 }
 
-/**
- * @see https://gist.github.com/ffoodd/000b59f431e3e64e4ce1a24d5bb36034
- */
-.sr-only {
-  border: 0 !important;
-  clip: rect(1px, 1px, 1px, 1px) !important;
-  -webkit-clip-path: inset(50%) !important;
-  clip-path: inset(50%) !important;
-  height: 1px !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  padding: 0 !important;
-  position: absolute !important;
-  width: 1px !important;
-  white-space: nowrap !important;
-}
+@media (min-width: 1025px) {
+	.header {
+		flex-direction: row;
+		justify-content: space-between;
+	}
 
-.sr-only-focusable:focus,
-.sr-only-focusable:active {
-  clip: auto !important;
-  -webkit-clip-path: none !important;
-  clip-path: none !important;
-  height: auto !important;
-  margin: auto !important;
-  overflow: visible !important;
-  width: auto !important;
-  white-space: normal !important;
-}
-
-.site-logo {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  grid-gap: 0.5em;
-  text-decoration: none;
-}
-
-.site-logo__content {
-  width: min-content;
-  font-weight: 700;
-  line-height: 1;
-}
-
-/*------------------------------------*\
-  #NAVIGATION
-\*------------------------------------*/
-/**
- * Quick explanation on the implementation of navigation bar.
- *
- * 1. Make sure that absolute-positioned child elements lives within its parent
- *    element rather than <body> element.
- * 2. Use the `id` attribute would indicate that the `skip-to-content` cannot be 
- *    used in somewhere else except for navigation bar.
- * 3. Prevent slide-in and slide-out overflows, caused by .primary-nav element.
- * 4. On large screens, remove `mobile-nav-toggle` button completely from the DOM.
- *    So, it cannot be accessed via assistive technologies or keyboard navigation.
- * 5. Allow `.primary-nav` to be scrollable when screen height is very small.
- * 6. When accessed through keyboard navigation, display it on the screen.
- *    is currently rendered at 480px high. Let’s…
- * 7. Default state values.
- * 8. Cover the entire screen when screen is very small.
- *
- */
-
-.primary-header-wrapper {
-  background-color: var(--gray-0);
-  padding-block: var(--size-fluid-2);
-  box-shadow: 0 5px 15px 3px rgba(0, 0, 0, 0.1);
-}
-
-.primary-header {
-  position: relative; /* [1] */
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-#skip-nav { /* [2] */
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.primary-nav {
-  overflow-x: hidden; /* [3] */
-}
-
-.primary-nav ul {
-  display: flex;
-  gap: 1.5rem;
-}
-
-.nav-link {
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.nav-link[aria-current="page"] {
-  border-bottom: 3px solid;
-}
-
-.mobile-nav-toggle {
-  display: none; /* [4] */
-}
-
-@media (max-width: 40em) {
-  .primary-nav {
-    position: fixed;
-    inset: 0 0 0 30%;
-    overflow-y: auto; /* [5] */
-
-    background-color: #f2f2f2;
-    padding-inline: min(3rem, 10vw);
-    padding-block: min(15rem, 30vh);
-
-    transition: transform 250ms ease-out;
-    z-index: 100;
-  }
-
-  .primary-nav[data-visible="false"] {
-    transform: translateX(100%);
-  }
-
-  .primary-nav[data-visible="true"] {
-    transform: translateX(0);
-  }
-
-  .primary-nav:focus-within {
-    transform: translateX(0); /* [6] */
-  }
-
-  .primary-nav ul {
-    flex-direction: column;
-  }
-
-  .mobile-nav-toggle {
-    --size: 1.5rem;
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 1000;
-    display: block;
-    background: none;
-    border: 0;
-    line-height: 1;
-    cursor: pointer;
-  }
-
-  .mobile-nav-toggle svg {
-    width: var(--size);
-    aspect-ratio: 1 / 1;
-  }
-
-  .open-icon {
-    display: block; /* [7] */
-  }
-
-  .close-icon {
-    display: none; /* [7] */
-  }
-
-  .mobile-nav-toggle[aria-expanded="true"] .open-icon {
-    display: none;
-  }
-
-  .mobile-nav-toggle[aria-expanded="true"] .close-icon {
-    display: block;
-  }
-}
-
-@media (max-width: 30em) {
-  .primary-nav {
-    inset: 0; /* [8] */
-  }
 }
