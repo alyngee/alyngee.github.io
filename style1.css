@@ -28,7 +28,7 @@ body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
-  background-color: #C2F1E9;
+  background-color: #F9FAF4;
 }
 
 h1,
@@ -171,7 +171,7 @@ svg {
  */
 
 .primary-header-wrapper {
-  background-color: #FFF4CB;
+  background-color: #9FAF4;
   padding-block: var(--size-fluid-2);
   box-shadow: 0 5px 15px 3px rgba(0, 0, 0, 0.1);
 }
@@ -219,7 +219,7 @@ svg {
     inset: 0 0 0 30%;
     overflow-y: auto; /* [5] */
 
-    background-color: #f2f2f2;
+    background-color: #e1f4e7;
     padding-inline: min(3rem, 10vw);
     padding-block: min(15rem, 30vh);
 
