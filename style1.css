@@ -28,7 +28,6 @@ body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
-  background-color: #F9FAF4;
 }
 
 h1,
@@ -219,7 +218,7 @@ svg {
     inset: 0 0 0 30%;
     overflow-y: auto; /* [5] */
 
-    background-color: #e1f4e7;
+    background-color: #f2f2f2;
     padding-inline: min(3rem, 10vw);
     padding-block: min(15rem, 30vh);
 
