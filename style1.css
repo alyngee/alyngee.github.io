@@ -68,6 +68,14 @@ a {
 	border-radius: 5px;
 }
 
+.topnav a:hover {
+  border-bottom: 3px #00B4C5;
+}
+
+.topnav a.active {
+  border-bottom: 3px #00B4C5;
+}
+
 
 /* ================================= 
   Media Queries
