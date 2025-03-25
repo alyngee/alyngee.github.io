@@ -51,6 +51,7 @@ a {
 
 .main-nav a:hover {
 	color: #718daa;
+	border-bottom: 3px #00B4C5;
 }
 
 
@@ -66,14 +67,6 @@ a {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-}
-
-.topnav a:hover {
-  border-bottom: 3px #00B4C5;
-}
-
-.topnav a.active {
-  border-bottom: 3px #00B4C5;
 }
 
 
