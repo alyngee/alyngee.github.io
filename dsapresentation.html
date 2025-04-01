@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <textarea id="text-input" oninput="this.editor.update()"
-              rows="6" cols="60"><!-- Slide number: 1 -->
+ <section data-markdown>
+  <textarea data-template>
+    
+    <!-- Slide number: 1 -->
  # Stigma & Health Information Seeking Behaviors of LGBTQ+ Individuals with Substance Use Concerns
  
  DSA Research Activity Lightning Round
@@ -202,19 +204,8 @@
  
  <!-- Slide number: 23 -->
  # Thank you!
- Questions: gamblea@simmons.edu</textarea>
-    <div id="preview"> </div>
-    <script src="lib/markdown.js"></script>
-    <script>
-      function Editor(input, preview) {
-        this.update = function () {
-          preview.innerHTML = markdown.toHTML(input.value);
-        };
-        input.editor = this;
-        this.update();
-      }
-      var $ = function (id) { return document.getElementById(id); };
-      new Editor($("text-input"), $("preview"));
-    </script>
+ Questions: gamblea@simmons.edu
+  </textarea>
+</section>
   </body>
 </html>
