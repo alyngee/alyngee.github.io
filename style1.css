@@ -27,14 +27,6 @@ a {
 	text-decoration: none;
 }
 
-.main-content-clamp {
-    /* 
-    Ensures padding stays reasonable across screen sizes
-    Min: 16px, Max: ~1 inch equivalent, Preferred: 7.5vw
-    */
-    padding: clamp(1rem, 7.5vw, 96px);
-}
-
 .logo {
 	margin: 0;
 	font-size: 1.45em;
