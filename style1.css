@@ -26,7 +26,7 @@ h3 {
 a {
 	text-decoration: none;
 	color: #1079A2;
-	border-bottom:  #0D6487;
+	border-bottom:  #0D6487 0.125em solid;
 }
 
 .logo {
