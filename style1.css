@@ -5,10 +5,11 @@
 	box-sizing: border-box;
 }
 body {
-	font-family: 'Montserrat', sans-serif;
-	line-height: 1.6;
-	margin: 10;
-	min-height: 100vh;
+  margin:5em auto;
+  font:1em sans-serif;
+  max-width:30em;
+  line-height:1.5;
+}
 }
 ul {
   margin: 0;
