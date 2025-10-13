@@ -5,9 +5,8 @@
 	box-sizing: border-box;
 }
 body {
-  margin:5em auto;
+  margin:20px auto;
   font:1em sans-serif;
-  max-width:30em;
   line-height:1.5;
 }
 
