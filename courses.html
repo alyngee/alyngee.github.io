@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses Taught</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #111110;
+      --ink2: #444441;
+      --ink3: #888780;
+      --rule: #d3d1c7;
+      --page: #ffffff;
+      --sans: 'Atkinson Hyperlegible', Arial, sans-serif;
+      --serif: 'Georgia', 'Times New Roman', serif;
+      --mono: 'Courier New', monospace;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink: #e8e6e0;
+        --ink2: #b4b2a9;
+        --ink3: #888780;
+        --rule: #444441;
+        --page: #18181a;
+      }
+    }
+
+    body {
+      font-family: var(--sans);
+      font-size: 11pt;
+      line-height: 1.5;
+      color: var(--ink);
+      background: var(--page);
+      padding: 2rem 1.5rem;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { padding: 0; font-size: 10pt; }
+      .no-print { display: none; }
+      section { break-inside: avoid; }
+      h2 { break-after: avoid; }
+    }
+
+    /* ── Layout ── */
+    .cv-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* ── Header ── */
+    .cv-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .cv-name {
+      font-family: var(--sans);
+      font-size: 22pt;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .cv-contact {
+      font-size: 9.5pt;
+      color: var(--ink2);
+      line-height: 1.8;
+    }
+
+    .cv-contact a {
+      color: var(--ink2);
+      text-decoration: none;
+    }
+
+    .cv-contact a:hover,
+    .cv-contact a:focus {
+      text-decoration: underline;
+      color: var(--ink);
+    }
+
+    /* ── Section headings ── */
+    section {
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-family: var(--sans);
+      font-size: 11pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 2px;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── CV entries ── */
+    .cv-entry {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      column-gap: 1rem;
+      margin-bottom: 0.6rem;
+      align-items: start;
+    }
+
+    .cv-entry-main {
+      grid-column: 1;
+    }
+
+    .cv-entry-date {
+      grid-column: 2;
+      font-size: 10pt;
+      color: var(--ink2);
+      white-space: nowrap;
+      text-align: right;
+      padding-top: 0.05rem;
+    }
+
+    .cv-role {
+      font-weight: bold;
+    }
+
+    .cv-org {
+      font-style: italic;
+    }
+
+    .cv-detail {
+      font-size: 10pt;
+      color: var(--ink2);
+      margin-top: 0.1rem;
+    }
+
+    .cv-award {
+      font-size: 9.5pt;
+      color: var(--ink2);
+      margin-top: 0.1rem;
+    }
+
+    /* ── Publications (APA style) ── */
+    .pub-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .pub-list li {
+      margin-bottom: 0.65rem;
+      padding-left: 2em;
+      text-indent: -2em;
+      font-size: 10.5pt;
+      line-height: 1.55;
+    }
+
+    .pub-title {
+      font-style: italic;
+    }
+
+    .pub-award {
+      display: inline-block;
+      margin-top: 0.15rem;
+      font-size: 9pt;
+      color: var(--ink2);
+    }
+
+    /* ── Simple list (presentations, service) ── */
+    .simple-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .simple-list li {
+      margin-bottom: 0.6rem;
+      padding-left: 2em;
+      text-indent: -2em;
+      font-size: 10.5pt;
+      line-height: 1.55;
+    }
+
+    /* ── Two-col for awards / certifications ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      column-gap: 1rem;
+      margin-bottom: 0.4rem;
+      align-items: baseline;
+    }
+
+    .two-col-main {
+      font-size: 10.5pt;
+      line-height: 1.4;
+    }
+
+    .two-col-date {
+      font-size: 10pt;
+      color: var(--ink2);
+      white-space: nowrap;
+      text-align: right;
+    }
+
+    /* ── Skip nav ── */
+    .skip-nav {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--ink);
+      color: var(--page);
+      padding: 6px 12px;
+      font-size: 10pt;
+      text-decoration: none;
+      border-radius: 0 0 4px 0;
+      z-index: 100;
+    }
+
+    .skip-nav:focus {
+      top: 0;
+    }
+
+    /* ── Print tip ── */
+    .print-tip {
+      text-align: center;
+      font-size: 9pt;
+      color: var(--ink3);
+      margin-bottom: 1.5rem;
+    }
+
+    .print-tip button {
+      font-size: 9pt;
+      font-family: var(--sans);
+      color: var(--ink2);
+      background: none;
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 3px 10px;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+
+    .print-tip button:hover { border-color: var(--ink3); }
+  </style>
+</head>
+<body>
+
+<a class="skip-nav" href="#main-content">Skip to main content</a>
+
+<div class="cv-wrap">
+
+
+  <header class="cv-header" role="banner">
+    <h1 class="cv-name">Alyn Gamble</h1>
+    <div class="cv-contact" aria-label="Contact information">
+      alynreads@gmail.com</a> &nbsp;|&nbsp;
+      agamble.info &nbsp;|&nbsp;
+      ORCID: 0000-0001-8583-6218
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- EDUCATION -->
+    <section aria-labelledby="education-heading">
+      <h2 id="education-heading">Education</h2>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Doctor of Philosophy in Library and Information Science</div>
+          <div class="cv-org">Simmons University</div>
+          <div class="cv-detail">Dissertation: &#x201C;&#x2018;A Great Place to Meet&#x2019;: Oral histories of sexual and gender minority members of a twelve-step program clubhouse&#x201D;</div>
+        </div>
+        <div class="cv-entry-date">2017&#x2013;2024</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Master of Library and Information Science</div>
+          <div class="cv-org">Louisiana State University</div>
+          <div class="cv-detail">Internship: Louisiana Universities Marine Consortium Library</div>
+        </div>
+        <div class="cv-entry-date">2011&#x2013;2013</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Master of Liberal Arts</div>
+          <div class="cv-org">Tulane University</div>
+          <div class="cv-detail">Thesis: &#x201C;Defining Distinction: Gender in American immigrant literature&#x201D;</div>
+        </div>
+        <div class="cv-entry-date">2009&#x2013;2011</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Bachelor of Arts, <em>cum laude</em></div>
+          <div class="cv-org">Spring Hill College</div>
+          <div class="cv-detail">Thesis: &#x201C;Comic Coups: A study in Stoppardian intertextuality&#x201D;</div>
+        </div>
+        <div class="cv-entry-date">2004&#x2013;2008</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Summer Course: Modern British Drama</div>
+          <div class="cv-org">King&#x2019;s College London</div>
+        </div>
+        <div class="cv-entry-date">Summer 2006</div>
+      </div>
+
+    </section>
+
+    <!-- PROFESSIONAL EXPERIENCE -->
+    <section aria-labelledby="experience-heading">
+      <h2 id="experience-heading">Professional Experience</h2>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">STEM Librarian</div>
+          <div class="cv-org">Northeastern University</div>
+        </div>
+        <div class="cv-entry-date">2023&#x2013;Present</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Affiliate Faculty, Department of Writing, Literature and Publishing</div>
+          <div class="cv-org">Emerson College</div>
+        </div>
+        <div class="cv-entry-date">2020&#x2013;Present</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Adjunct Faculty, School of Library and Information Science</div>
+          <div class="cv-org">Simmons University</div>
+        </div>
+        <div class="cv-entry-date">2025&#x2013;Present</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Research Librarian for the Sciences, Tisch Library</div>
+          <div class="cv-org">Tufts University</div>
+        </div>
+        <div class="cv-entry-date">2020&#x2013;2023</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Research Assistant, Project Oneness World</div>
+          <div class="cv-org">Simmons University</div>
+        </div>
+        <div class="cv-entry-date">2022</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Research Associate, Harvard Data Science Review</div>
+          <div class="cv-org">Harvard University</div>
+        </div>
+        <div class="cv-entry-date">2018&#x2013;2020</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Independent Contractor</div>
+          <div class="cv-org">Advanti Solutions</div>
+        </div>
+        <div class="cv-entry-date">2019&#x2013;2020</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Doctoral Research Assistant, IMLS &#x201C;Measuring Library Broadband Networks for the National Digital Platform&#x201D; (LG-71-18-0110-18)</div>
+          <div class="cv-org">Simmons University</div>
+        </div>
+        <div class="cv-entry-date">2018</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Data Fellow, Research Data Management Librarian Academy (RDMLA) Program</div>
+          <div class="cv-org">Elsevier</div>
+        </div>
+        <div class="cv-entry-date">2018</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Consultant, Library for Food Sovereignty</div>
+          <div class="cv-org">A Growing Culture</div>
+        </div>
+        <div class="cv-entry-date">2018</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Content Manager</div>
+          <div class="cv-org">Countway Library of Medicine</div>
+        </div>
+        <div class="cv-entry-date">2017&#x2013;2018</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Science Curriculum Librarian</div>
+          <div class="cv-org">Judge Baker Children&#x2019;s Center</div>
+        </div>
+        <div class="cv-entry-date">2017&#x2013;2018</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Graduate Assistant, Residence Life</div>
+          <div class="cv-org">Simmons University</div>
+        </div>
+        <div class="cv-entry-date">2017&#x2013;2018</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Research Assistant, Library &amp; Information Science Research</div>
+          <div class="cv-org">Simmons University</div>
+        </div>
+        <div class="cv-entry-date">2017</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Research Assistant</div>
+          <div class="cv-org">WGBH Media Library</div>
+        </div>
+        <div class="cv-entry-date">2017</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">e-Learning Systems Intern</div>
+          <div class="cv-org">Credo Education</div>
+        </div>
+        <div class="cv-entry-date">2017</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Blog Editor, Education Technologies</div>
+          <div class="cv-org">Wolfram Research</div>
+        </div>
+        <div class="cv-entry-date">2016&#x2013;2017</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Assistant Librarian, Sciences, Jane Bancroft Cook Library</div>
+          <div class="cv-org">New College of Florida and University of South Florida Sarasota-Manatee</div>
+        </div>
+        <div class="cv-entry-date">2015&#x2013;2017</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Librarian</div>
+          <div class="cv-org">Mote Marine Laboratory and Aquarium</div>
+        </div>
+        <div class="cv-entry-date">2014&#x2013;2015</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Library Technician</div>
+          <div class="cv-org">Tulane University</div>
+        </div>
+        <div class="cv-entry-date">2011&#x2013;2013</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Research Help Desk Student Assistant</div>
+          <div class="cv-org">Tulane University</div>
+        </div>
+        <div class="cv-entry-date">2010&#x2013;2011</div>
+      </div>
+
+       <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Administrative Assistant</div>
+          <div class="cv-org">Ministry Against the Death Penalty</div>
+        </div>
+        <div class="cv-entry-date">2010</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Literary Manager</div>
+          <div class="cv-org">Bienville Books</div>
+        </div>
+        <div class="cv-entry-date">2007&#x2013;2009</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Library Support Specialist</div>
+          <div class="cv-org">Spring Hill College</div>
+        </div>
+        <div class="cv-entry-date">2005&#x2013;2008</div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Cashier</div>
+          <div class="cv-org">Dew Drop Inn</div>
+        </div>
+        <div class="cv-entry-date">2003&#x2013;2006</div>
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section aria-labelledby="publications-heading">
+      <h2 id="publications-heading">Publications</h2>
+     <p style="font-size:9pt; color:var(--ink2); margin-bottom:0.6rem;">* indicates student co-author</p>
+      <ul class="pub-list" aria-label="Publications in APA format">
+
+        <li>Gamble, A., &amp; Schuler, A. (2023). OER by any other name: Results from a faculty listening tour at a mid-sized research university. <span class="pub-title">Journal of Open Educational Resources in Higher Education, 2</span>(1).</li>
+
+        <li>Gamble, A. (2023). <span class="pub-title">Making a website using GitHub Pages.</span> OER Commons.</li>
+
+        <li>Gamble, A. (2023). And what we would have been if we were in the stacks? In K. Adolpho, S. G. Krueger, &amp; K. McCracken (Eds.), <span class="pub-title">Trans and gender diverse voices in libraries.</span> Litwin Books.</li>
+
+        <li>Gamble, A. (2022). [Book review of <span class="pub-title">LIS interrupted: Intersections of mental health and library work</span>]. <span class="pub-title">Education for Information, 1</span>(1&#x2013;2).</li>
+
+        <li>Gamble, A. (2020). Artificial intelligence and mobile apps for mental healthcare: A social informatics perspective. <span class="pub-title">Aslib Journal of Information Management, 72</span>(4).
+          <span class="pub-award" style="display:block;">&#x2605; Winner, Emerald Publishing 2021 Outstanding Paper Literati Award</span>
+        </li>
+
+        <li>Gamble, A. (2020). Artificial intelligence and mobile apps for mental healthcare: A social informatics perspective. <span class="pub-title">Proceedings of the IADIS International Conference on Internet Technologies &amp; Society (ITS 2020).</span></li>
+
+        <li>Gamble, A. (2019). Ullmann&#x2019;s encyclopedia of industrial chemistry. <span class="pub-title">The Charleston Advisor, 20</span>(4), 46&#x2013;50.</li>
+
+        <li>Gamble, A., Grguric, E., Khan*, N., Hockin, T., &amp; Dressler, V. (2019). Digital liaisons: Connecting diverse voices to support an ethical and sustainable information future in digital libraries. <span class="pub-title">Proceedings of the Association for Information Science and Technology, 55</span>(1), 688&#x2013;690.</li>
+
+        <li>Gamble, A., Rhinesmith, C., Ritzo, C., Bullen, G., &amp; Werle, J. (2019). Participatory development of an open source broadband measurement platform for public libraries. In <span class="pub-title">Information in contemporary society: iConference 2019. Lecture Notes in Computer Science, 11420</span>, 274&#x2013;279.</li>
+
+        <li>Gamble, A. (2018). Biological abstracts (Clarivate Analytics). <span class="pub-title">The Charleston Advisor, 20</span>(1), 19&#x2013;25.</li>
+
+        <li>Gamble, A., Kallaher, A., Lacey*, N., Maass, A., Ralph*, C., Ryba, T., &amp; Tanaka*, M. (2017). Harnessing the winds: Collaboration and the Aeolus research journal. In M. K. Hensley &amp; S. Davis-Kahl (Eds.), <span class="pub-title">Undergraduate research and the academic librarian: Case studies &amp; best practices</span> (Chapter 12). ACRL.</li>
+
+        <li>Gamble, A. (2017). PubMed Central (PMC). <span class="pub-title">The Charleston Advisor, 19</span>(2), 48&#x2013;54.</li>
+
+        <li>Gamble, A., Cunningham, C., Dressler, V., Grguric, E., &amp; Khan*, N. (2017). Digital liaisons virtual uncommons: Connecting information and people in order to enhance lives via digital librarianship. <span class="pub-title">Proceedings of the Annual Meeting of the Association for Information Science and Technology, 54</span>, 556&#x2013;558.</li>
+
+        <li>Gamble, A. (2017). SciFinder&#x00AE;. <span class="pub-title">The Charleston Advisor, 19</span>(1), 38&#x2013;43.</li>
+
+        <li>Gamble, A. (2017). Wolfram language for teaching computational thinking to K&#x2013;12 learners. <span class="pub-title">International Journal of People-Oriented Programming, 6</span>(1).</li>
+
+        <li>Gamble, A., &amp; Kallaher, A. (2017). GIS and the humanities: Presenting a path to digital scholarship with the Story Map app. <span class="pub-title">College &amp; Undergraduate Research Libraries, 24</span>(2&#x2013;4).</li>
+
+        <li>Gamble, A., &amp; Race, T. (2017). From potato chips to vegetables: Embedded instruction in a general biology classroom. In R. Pun &amp; M. Houlihan (Eds.), <span class="pub-title">The first year experience library cookbook.</span> ACRL.</li>
+
+        <li>Gamble, A. (2016). The interactive web: Pregnancy resources. <span class="pub-title">Journal of Electronic Resources in Medical Libraries, 13</span>(4).</li>
+
+        <li>Gamble, A. (2016). Multimedia creation in the small campus library. <span class="pub-title">Against the Grain.</span></li>
+
+        <li>Gamble, A. (2016). Computational thinking beyond Computer Science Education Week. <span class="pub-title">Wolfram Blog.</span></li>
+
+        <li>Gamble, A., &amp; Kallaher, A. (2016). <span class="pub-title">The power of story maps: Learn how to use ArcGIS and story maps for digital humanities.</span> Open Science Framework.</li>
+
+        <li>Gamble, A., Cunningham, C., &amp; Grguric, E. (2016). Digital liaisons virtual uncommons: Creating knowledge, enhancing lives via digital libraries. <span class="pub-title">Proceedings of the Annual Meeting of the Association for Information Science and Technology, 53.</span></li>
+
+        <li>Gamble, A. (2016). [Film review of <span class="pub-title">Tender</span>]. <span class="pub-title">Education Media Reviews Online.</span></li>
+
+        <li>Gamble, A. (2016). [Film review of <span class="pub-title">The Battle of amFAR</span>]. <span class="pub-title">Education Media Reviews Online.</span></li>
+
+        <li>Gamble, A. (2016). As necessary as water: Information science in marine biomedical research. In D. Barr (Ed.), <span class="pub-title">Blue growth: Motivating innovations in aquatic information management: Proceedings of the 41st IAMSLIC Conference, Rome, Italy</span> (pp. 96&#x2013;101). IAMSLIC.</li>
+
+        <li>Gamble, A., &amp; Kallaher, A. (2016). Metaliteracy and the library: Teaching an undergraduate research journal [Recording]. <span class="pub-title">Library Voices,</span> Taylor and Francis LibSite.</li>
+
+        <li>Gamble, A. (2016). [Film review of <span class="pub-title">ThuleTuvalu</span>]. <span class="pub-title">Educational Media Reviews Online.</span></li>
+
+        <li>Gamble, A. (2015). World Aquaculture Society (https://www.was.org/). <span class="pub-title">Journal of Agricultural &amp; Food Information, 16</span>(4), 285&#x2013;292.</li>
+
+        <li>Gamble, A. (2015). Social media for genetic research. <span class="pub-title">Bioethics Forum,</span> The Hastings Center.</li>
+
+      </ul>
+    </section>
+
+    <!-- CONFERENCE PRESENTATIONS -->
+    <section aria-labelledby="presentations-heading">
+      <h2 id="presentations-heading">Conference Presentations</h2>
+      <ul class="simple-list">
+
+        <li>Gamble, A., &amp; Schuler, A. (2022, May 26). <em>Advancing library support of OER with a faculty listening tour: What we learned and how you can do it, too.</em> Northeast OER Summit.</li>
+
+        <li>Gamble, A., Heinrich, C., Kang, A., &amp; Passinhas-Bergman, S. (2021, July 22). <em>&#x201C;What do you mean?&#x201D;: A conversation about user-centered reference for academic health information.</em> Boston Library Consortium Workshop.</li>
+
+        <li>Gamble, A., Schuler, A., Kijas, A., &amp; Fiorentino, W. (2021, March 5). <em>Revitalizing OER: Outreach, funding, &amp; user-centered development in a remote environment.</em> New England Association for Information Science and Technology Annual Conference.</li>
+
+        <li>Gamble, A., &amp; Boyd, K. (2020, March 8&#x2013;11). <em>Cupper and leecher, tinman and shrimp fiend: Data science tools for examining historical occupation data.</em> Code4Lib, Pittsburgh, PA.</li>
+
+        <li>Gamble, A. (2020, February 5&#x2013;7). <em>Artificial intelligence and mobile apps for mental healthcare: A social informatics perspective.</em> 10th International Conference on Internet Technologies &amp; Society, Universidade de S&#x00E3;o Paulo, Brazil.</li>
+
+        <li>Gamble, A., &amp; Boyd, K. (2020, January 24). <em>Examples of impact: Enhancing access to historical data through mapping and visualization tools.</em> LEADS-4-NDP Forum, Drexel University, Philadelphia, PA.</li>
+
+        <li>Gamble, A., Grguric, E., Khan, N., Hockin, T., &amp; Dressler, V. (2018). <em>Digital liaisons: Connecting diverse voices to support an ethical and sustainable information future in digital libraries</em> [Panel]. Association of Information Science and Technology Annual Meeting, Vancouver, BC.</li>
+
+        <li>Gamble, A., Cunningham, C., Dressler, V., Grguric, E., &amp; Khan, N. (2017, November 1). <em>Digital liaisons virtual uncommons: Connecting information and people in order to enhance lives via digital librarianship</em> [Panel]. Association of Information Science and Technology Annual Meeting, Crystal City, VA.</li>
+
+        <li>Gamble, A. (2017, April 6). <em>Developing data information literacy with the Institutional Review Board</em> [Poster presentation]. 9th Annual University of Massachusetts and New England Area Librarian e-Science Symposium, Worcester, MA.
+          <span class="pub-award" style="display:block;">&#x2605; Winner, Best e-Science in Action Poster</span>
+        </li>
+
+        <li>Gamble, A., &amp; Kallaher, A. (2016, November 6). <em>The power of story maps: Learn how to use ArcGIS and story maps for digital humanities.</em> Digital Library Federation&#x2019;s Liberal Arts Colleges Pre-Conference, Milwaukee, WI.</li>
+
+        <li>Gamble, A., Cunningham, C., &amp; Grguric, E. (2016, October 18). <em>Digital liaisons virtual uncommons: Creating knowledge, enhancing lives via digital libraries</em> (SIG/DL). Association of Information Science and Technology Annual Meeting, Copenhagen, Denmark.</li>
+
+        <li>Gamble, A. (2016, July 6&#x2013;8). <em>Gathering wind: Aeolus: An undergraduate research journal.</em> Science Boot Camp for Librarians Southeast, University of Georgia.</li>
+
+        <li>Gamble, A., &amp; Kallaher, A. (2016, June 23). <em>Scholarly publishing as pedagogy &amp; outreach: Undergraduate student research journals, metaliteracy, &amp; campus engagement.</em> Florida Scholarly Communication Interest Group Unconference, Rollins College, Orlando, FL.</li>
+
+        <li>Gamble, A. (2015, February 15). <em>Consilience and the special collections: Mote Marine Laboratory &amp; Aquarium&#x2019;s library &amp; archives.</em> ACRL Session, American Association for the Advancement of Science Annual Meeting, San Jose, CA.</li>
+
+        <li>Gamble, A. (2014, October 31&#x2013;November 5). <em>Digital consilience: Integrating the archives and library of a marine research facility.</em> Association for Information Science and Technology Digital Liaisons Panel, Seattle, WA.</li>
+
+        <li>Gamble, A. (2014, August 31&#x2013;September 1). <em>Early marine research in southwestern Florida.</em> Pioneer Days, Englewood, FL.</li>
+
+        <li>Gamble, A. (2014, May 14&#x2013;16). <em>Innovations and elasmobranchs: Consilience in the Mote Marine Laboratory archives and library.</em> Southeast Affiliate, International Association of Marine Science Libraries and Information Centers Annual Meeting, St. John&#x2019;s, NL.</li>
+
+        <li>Gamble, A., &amp; Stover, S. (2014, May 7). <em>Consolidating access to Florida&#x2019;s historical environmental records</em> [Poster presentation]. Florida Libraries Association Annual, Orlando, FL.</li>
+
+        <li>Gamble, A. (2013). <em>Conferences 2013.</em> Howard Tilton Memorial Library, Tulane University.</li>
+
+        <li>Gamble, A. (2013, November 1&#x2013;5). <em>Creating a marine resources center&#x2019;s digital repository.</em> Association for Information Science and Technology Digital Liaisons Panel, Montreal, QC.</li>
+
+        <li>Gamble, A., Davis, M., Loehr, T., Orange, K., Pollard, J., Richards, J., Sims, G., &amp; Starr, B. (2007, September 27&#x2013;28). <em>Facing poverty: An interdisciplinary service learning project.</em> To Whom Much Is Given Conference, University of Alabama, Tuscaloosa, AL.</li>
+
+      </ul>
+    </section>
+
+    <!-- FELLOWSHIPS & GRANTS -->
+    <section aria-labelledby="fellowships-heading">
+      <h2 id="fellowships-heading">Fellowships &amp; Grants</h2>
+
+      <div class="two-col"><div class="two-col-main">Graduate Student Research Fund Award, Simmons University</div><div class="two-col-date">2024</div></div>
+      <div class="two-col"><div class="two-col-main">Beta Phi Mu Eugene Garfield Doctoral Dissertation Fellowship &#x2014; &#x201C;A Great Place to Meet: Oral histories of LGBTQ+ members of a mutual aid addiction recovery facility&#x201D;</div><div class="two-col-date">2023</div></div>
+      <div class="two-col"><div class="two-col-main">McGrath Global Research Grant, Simmons University</div><div class="two-col-date">2022</div></div>
+      <div class="two-col"><div class="two-col-main">Bob Williams Research Grant &#x2014; &#x201C;Mental Health Information in LIS: A Retrospective of Access and Attitudes,&#x201D; SIG-History and Foundations of Information Science, ASIS&amp;T</div><div class="two-col-date">2020</div></div>
+      <div class="two-col"><div class="two-col-main">LIS Education and Data Science for the National Digital Platform (LEADS-4-NDP) Fellowship</div><div class="two-col-date">2019&#x2013;2020</div></div>
+      <div class="two-col"><div class="two-col-main">Beta Phi Mu, Frank B. Sessa Scholarship</div><div class="two-col-date">2016</div></div>
+      <div class="two-col"><div class="two-col-main">National Film Preservation Foundation, Basic Preservation Grant &#x2014; &#x201C;Dr. Eugenie Clark Laboratory Films&#x201D; (FED16-024)</div><div class="two-col-date">2016</div></div>
+      <div class="two-col"><div class="two-col-main">Medical Library Association, Eugene Garfield Research Fellowship &#x2014; &#x201C;History of Information Science in Marine Biomedical Research&#x201D;</div><div class="two-col-date">2015</div></div>
+      <div class="two-col"><div class="two-col-main">National Film Preservation Foundation, Basic Preservation Grant &#x2014; &#x201C;Dr. Eugenie Clark Laboratory Films&#x201D; (FED15-012)</div><div class="two-col-date">2015</div></div>
+      <div class="two-col"><div class="two-col-main">Sea Grant, Elise B. Newell Florida Seminar</div><div class="two-col-date">2015</div></div>
+      <div class="two-col"><div class="two-col-main">International Association of Marine and Aquatic Libraries and Information Centers Travel Grant</div><div class="two-col-date">2015</div></div>
+      <div class="two-col"><div class="two-col-main">International Association of Marine and Aquatic Libraries and Information Centers, SAIL Chapter, Travel Grant (×2)</div><div class="two-col-date">2014&#x2013;2015</div></div>
+      <div class="two-col"><div class="two-col-main">BioOne Publishers and Partners, Goldstein Travel Grant</div><div class="two-col-date">2014&#x2013;2015</div></div>
+      <div class="two-col"><div class="two-col-main">Louisiana State University, John and Hester Slocum Fellowship</div><div class="two-col-date">2012</div></div>
+      <div class="two-col"><div class="two-col-main">Louisiana Library Association, Thorpe Associates Grassroots Grant</div><div class="two-col-date">2012</div></div>
+      <div class="two-col"><div class="two-col-main">Spring Hill College, Study Abroad Committee Grant</div><div class="two-col-date">2006</div></div>
+      <div class="two-col"><div class="two-col-main">Spring Hill College, Academic Metropolitan Scholarship</div><div class="two-col-date">2004&#x2013;2008</div></div>
+    </section>
+
+    <!-- HONORS & AWARDS -->
+    <section aria-labelledby="awards-heading">
+      <h2 id="awards-heading">Honors &amp; Awards</h2>
+
+      <div class="two-col"><div class="two-col-main">Emerald Publishing, 2021 Outstanding Paper Literati Award</div><div class="two-col-date">2021</div></div>
+      <div class="two-col"><div class="two-col-main">SIG-Digital Libraries, ASIS&amp;T, Deborah Barreau Memorial Award</div><div class="two-col-date">2018</div></div>
+      <div class="two-col"><div class="two-col-main">New England Chapter of ASIS&amp;T, Annual Travel Award</div><div class="two-col-date">2018</div></div>
+      <div class="two-col"><div class="two-col-main">9th Annual UMass &amp; New England Area Librarian e-Science Symposium, Best Example of e-Science in Action Poster</div><div class="two-col-date">2017</div></div>
+      <div class="two-col"><div class="two-col-main">Association for Information Science and Technology, SIG Member of the Year Award</div><div class="two-col-date">2016</div></div>
+      <div class="two-col"><div class="two-col-main">Association for Information Science and Technology, New Leaders Award</div><div class="two-col-date">2016&#x2013;2017</div></div>
+      <div class="two-col"><div class="two-col-main">New College of Florida, Summer Faculty Development Award</div><div class="two-col-date">2016</div></div>
+      <div class="two-col"><div class="two-col-main">Beta Phi Mu, Beta Zeta Chapter</div><div class="two-col-date">2015</div></div>
+      <div class="two-col"><div class="two-col-main">Louisiana State University School of Library and Information Science Project Recovery Program Award</div><div class="two-col-date">2013</div></div>
+      <div class="two-col"><div class="two-col-main">National Network of Libraries of Medicine, South Central Region, Library Student Outreach Award</div><div class="two-col-date">2013</div></div>
+      <div class="two-col"><div class="two-col-main">Omicron Delta Kappa, Tulane University</div><div class="two-col-date">2010</div></div>
+      <div class="two-col"><div class="two-col-main">Golden Key International Honor Society, Tulane University</div><div class="two-col-date">2010</div></div>
+      <div class="two-col"><div class="two-col-main">Sigma Tau Delta, Spring Hill College</div><div class="two-col-date">2007</div></div>
+    </section>
+
+    <!-- PROFESSIONAL LEADERSHIP & SERVICE -->
+    <section aria-labelledby="service-heading">
+      <h2 id="service-heading">Professional Leadership &amp; Service</h2>
+
+      <div class="two-col"><div class="two-col-main">Faculty Advisor, Emerson Reads</div><div class="two-col-date">2024&#x2013;Present</div></div>
+      <div class="two-col"><div class="two-col-main">Steering Committee Member, LGBTQA FacStaff Affinity Group, Northeastern University</div><div class="two-col-date">2025&#x2013;Present</div></div>
+      <div class="two-col"><div class="two-col-main">Member, College of Science Equity, Diversity, and Inclusion Committee, Northeastern University</div><div class="two-col-date">2024&#x2013;Present</div></div>
+      <div class="two-col"><div class="two-col-main">Organizer, Greater Boston Catholic LGBTQIA Collective</div><div class="two-col-date">2020&#x2013;2023</div></div>
+      <div class="two-col"><div class="two-col-main">Member, Publications Committee, ASIS&amp;T</div><div class="two-col-date">2020&#x2013;2023</div></div>
+      <div class="two-col"><div class="two-col-main">Member, Association for Information Science and Technology (ASIS&amp;T)</div><div class="two-col-date">2012&#x2013;2023</div></div>
+      <div class="two-col"><div class="two-col-main">Member, International Association for the Development of the Information Society</div><div class="two-col-date">2019&#x2013;2020</div></div>
+      <div class="two-col"><div class="two-col-main">Volunteer, MA Responds (COVID-19)</div><div class="two-col-date">2020&#x2013;2021</div></div>
+      <div class="two-col"><div class="two-col-main">Proposal Reviewer, ASIS&amp;T Annual Meeting Program Committee</div><div class="two-col-date">2020&#x2013;2021</div></div>
+      <div class="two-col"><div class="two-col-main">Member, Harvard Gender and Sexuality Caucus</div><div class="two-col-date">2018&#x2013;2019</div></div>
+      <div class="two-col"><div class="two-col-main">Proposal Reviewer, NEASIS&amp;T Travel Award</div><div class="two-col-date">2019</div></div>
+      <div class="two-col"><div class="two-col-main">Peer Reviewer, Aeolus Research Journal</div><div class="two-col-date">2019</div></div>
+      <div class="two-col"><div class="two-col-main">Co-Chair, Doctoral Student Association, Simmons University School of Library and Information Science</div><div class="two-col-date">2018&#x2013;2019</div></div>
+      <div class="two-col"><div class="two-col-main">Co-Chair, Special Interest Group&#x2013;Digital Libraries, ASIS&amp;T</div><div class="two-col-date">2016&#x2013;2018</div></div>
+      <div class="two-col"><div class="two-col-main">Proposal Reviewer, Diversity, Equity, Race, Accessibility, and Identity in LIS (DERAIL) Forum</div><div class="two-col-date">2018</div></div>
+      <div class="two-col"><div class="two-col-main">Member, Institutional Review Board, New College of Florida</div><div class="two-col-date">2016&#x2013;2017</div></div>
+      <div class="two-col"><div class="two-col-main">Member, Education Committee, Council of Science Editors</div><div class="two-col-date">2017&#x2013;2018</div></div>
+      <div class="two-col"><div class="two-col-main">Member, Publications Committee, ASIS&amp;T</div><div class="two-col-date">2016&#x2013;2018</div></div>
+      <div class="two-col"><div class="two-col-main">Member, Committee of the ASIS&amp;T SIG Living Manual Initiative</div><div class="two-col-date">2016&#x2013;2017</div></div>
+      <div class="two-col"><div class="two-col-main">Sponsor, NCF Nat Sci Journal Club, New College of Florida</div><div class="two-col-date">2017</div></div>
+      <div class="two-col"><div class="two-col-main">Volunteer, Inclusivity Committee, Digital Library Federation Forum</div><div class="two-col-date">2017</div></div>
+      <div class="two-col"><div class="two-col-main">Chair, Educational Technology Services Coordinator Search Committee, New College of Florida</div><div class="two-col-date">2017</div></div>
+      <div class="two-col"><div class="two-col-main">Member, Provost Search Committee, New College of Florida</div><div class="two-col-date">2016&#x2013;2017</div></div>
+      <div class="two-col"><div class="two-col-main">Member, Planning Committee, Women in Data Science (WiDS) Conference, New College of Florida</div><div class="two-col-date">2016&#x2013;2017</div></div>
+      <div class="two-col"><div class="two-col-main">Chair, General Non-Fiction Jury, Florida Book Awards</div><div class="two-col-date">2016</div></div>
+      <div class="two-col"><div class="two-col-main">Chair-Elect and Secretary-Treasurer, SIG-Digital Libraries, ASIS&amp;T</div><div class="two-col-date">2015&#x2013;2016</div></div>
+      <div class="two-col"><div class="two-col-main">Volunteer Librarian, Mote Marine Laboratory and Aquarium</div><div class="two-col-date">2015&#x2013;2016</div></div>
+      <div class="two-col"><div class="two-col-main">Juror, General Non-Fiction, Florida Book Awards</div><div class="two-col-date">2015</div></div>
+      <div class="two-col"><div class="two-col-main">Member, RegOnline Committee, International Association of Marine Science Libraries and Information Centers</div><div class="two-col-date">2015&#x2013;2016</div></div>
+      <div class="two-col"><div class="two-col-main">Proposal Reviewer, IAMSLIC SAIL Chapter 2016 Annual Meeting</div><div class="two-col-date">2016</div></div>
+      <div class="two-col"><div class="two-col-main">Mentor, Bright House Bright Ideas: STEM for Today&#x2019;s Youth</div><div class="two-col-date">2015</div></div>
+      <div class="two-col"><div class="two-col-main">Judge, Non-Fiction, Florida Authors and Publishers Association</div><div class="two-col-date">2015</div></div>
+      <div class="two-col"><div class="two-col-main">Poster Proposal Reviewer, Medical Library Association, Southern Chapter</div><div class="two-col-date">2015</div></div>
+      <div class="two-col"><div class="two-col-main">Committee Convener, Digital Liaisons, ASIS&amp;T SIG-Digital Libraries</div><div class="two-col-date">2014&#x2013;2015</div></div>
+      <div class="two-col"><div class="two-col-main">President, ASIS&amp;T Louisiana State University Student Chapter</div><div class="two-col-date">2012&#x2013;2013</div></div>
+      <div class="two-col"><div class="two-col-main">President, Special Libraries Association, Louisiana State University Student Chapter</div><div class="two-col-date">2012&#x2013;2013</div></div>
+      <div class="two-col"><div class="two-col-main">Performer, Louisiana Book Festival, Children&#x2019;s Stage</div><div class="two-col-date">2012</div></div>
+      <div class="two-col"><div class="two-col-main">Volunteer Leader, Hands On New Orleans</div><div class="two-col-date">2010</div></div>
+      <div class="two-col"><div class="two-col-main">Tutor, Start the Adventure in Reading</div><div class="two-col-date">2009&#x2013;2010</div></div>
+    </section>
+
+    <!-- ADDITIONAL CERTIFICATIONS, EDUCATION & TRAINING -->
+    <section aria-labelledby="training-heading">
+      <h2 id="training-heading">Additional Certifications, Education, &amp; Training</h2>
+
+      <div class="two-col"><div class="two-col-main">Latin Beginner I, Oxford Latinitas</div><div class="two-col-date">2026</div></div>
+      <div class="two-col"><div class="two-col-main">Bioinformatics and Biology Essentials for Librarians, National Network of Libraries of Medicine (30 MLA CE credits)</div><div class="two-col-date">2024</div></div>
+      <div class="two-col"><div class="two-col-main">VILLA: Working in the Open, Emerson College</div><div class="two-col-date">2023</div></div>
+      <div class="two-col"><div class="two-col-main">Jamaica Plain Improv 101, 201, 301</div><div class="two-col-date">2022&#x2013;2023</div></div>
+      <div class="two-col"><div class="two-col-main">RELATE Pilot, Emerson College</div><div class="two-col-date">2022</div></div>
+      <div class="two-col"><div class="two-col-main">Training Transformational Teachers Program, Emerson College</div><div class="two-col-date">2021</div></div>
+      <div class="two-col"><div class="two-col-main">Building Life-Long Opportunities for Strength, Self-Care, Outlook, Morale and Mindfulness, NNLM (8 MLA CE credits)</div><div class="two-col-date">2021</div></div>
+      <div class="two-col"><div class="two-col-main">Systematic Review Essentials, Library Juice Academy</div><div class="two-col-date">2020</div></div>
+      <div class="two-col"><div class="two-col-main">Data Science Foundations Carpentry, Drexel University</div><div class="two-col-date">2020</div></div>
+      <div class="two-col"><div class="two-col-main">LEADS-4-NDP 2019 Data Science Boot Camp, Drexel University</div><div class="two-col-date">2019</div></div>
+      <div class="two-col"><div class="two-col-main">Introduction to Data Visualization with Tableau; Intermediate Tableau; Design Principles for Data Visualization, Harvard University</div><div class="two-col-date">2019</div></div>
+      <div class="two-col"><div class="two-col-main">Online Faculty Fellows, Simmons University</div><div class="two-col-date">2018</div></div>
+      <div class="two-col"><div class="two-col-main">Basic Human Subjects Protection &amp; HIPAA and Human Subjects Research, CITI Program</div><div class="two-col-date">2018</div></div>
+      <div class="two-col"><div class="two-col-main">Motorcycle Endorsement License, Motorcycle Safety Foundation</div><div class="two-col-date">2017</div></div>
+      <div class="two-col"><div class="two-col-main">Biostatistics I, University of South Florida</div><div class="two-col-date">2016</div></div>
+      <div class="two-col"><div class="two-col-main">Short Course for Journal Editors, Council of Science Editors</div><div class="two-col-date">2016</div></div>
+      <div class="two-col"><div class="two-col-main">Advanced Scuba Diver and Enriched Air Nitrox (EANx) Diver, National Association of Underwater Instructors</div><div class="two-col-date">2016</div></div>
+      <div class="two-col"><div class="two-col-main">Research Data Management and Sharing, University of North Carolina at Chapel Hill &amp; University of Edinburgh (Coursera)</div><div class="two-col-date">2016</div></div>
+      <div class="two-col"><div class="two-col-main">Cool Creative Communications: Dazzling Data Visualization, NNLM (5 MLA CE credits)</div><div class="two-col-date">2016</div></div>
+      <div class="two-col"><div class="two-col-main">Copyright for Multimedia, Duke University, Emory University &amp; UNC Chapel Hill (Coursera)</div><div class="two-col-date">2016</div></div>
+      <div class="two-col"><div class="two-col-main">Libraries and the Changing Scholarly Environment: Data Visualization, Library Journal</div><div class="two-col-date">2016</div></div>
+      <div class="two-col"><div class="two-col-main">Theory and Standards: Debating the New Framework for Information Literacy in Higher Education, ASIS&amp;T Indiana Chapter</div><div class="two-col-date">2016</div></div>
+      <div class="two-col"><div class="two-col-main">Advanced Workshop: Persuasive Grant Proposal Writing, New College of Florida</div><div class="two-col-date">2016</div></div>
+      <div class="two-col"><div class="two-col-main">R Studio Workshop, New College of Florida</div><div class="two-col-date">2016</div></div>
+      <div class="two-col"><div class="two-col-main">Become a Wikipedian, New College of Florida</div><div class="two-col-date">2016</div></div>
+      <div class="two-col"><div class="two-col-main">Virtual Symposium on Research Data Management, Association for Library Collections and Technical Services</div><div class="two-col-date">2016</div></div>
+      <div class="two-col"><div class="two-col-main">Biomedical Responsible Conduct of Research (multiple modules), CITI Program</div><div class="two-col-date">2015</div></div>
+      <div class="two-col"><div class="two-col-main">Scuba Diver, National Association of Underwater Instructors</div><div class="two-col-date">2015</div></div>
+      <div class="two-col"><div class="two-col-main">Fall 2015 National Science Foundation (NSF) Grants Conference, Arlington, VA</div><div class="two-col-date">2015</div></div>
+      <div class="two-col"><div class="two-col-main">Text and Data Mining Library Content, ACRL Choice Webinar</div><div class="two-col-date">2015</div></div>
+      <div class="two-col"><div class="two-col-main">Aquatic Commons Workshop, IAMSLIC Annual Meeting, FAO, Rome, Italy</div><div class="two-col-date">2015</div></div>
+      <div class="two-col"><div class="two-col-main">Adult First Aid/CPR/AED, American Red Cross (two-year certification)</div><div class="two-col-date">2015</div></div>
+      <div class="two-col"><div class="two-col-main">EBM/EBP: Beyond the Basics&#x2014;Systematic Reviews and Qualitative Studies, MLA Southern Chapter (4 MLA CE credits)</div><div class="two-col-date">2014</div></div>
+      <div class="two-col"><div class="two-col-main">RDA/MARC for Copy Cats, Northeast Florida Library Information Network</div><div class="two-col-date">2014</div></div>
+      <div class="two-col"><div class="two-col-main">Library Website Series, Northeast Florida Library Information Network</div><div class="two-col-date">2014</div></div>
+      <div class="two-col"><div class="two-col-main">Copyright for Digital Materials, Society of American Archivists</div><div class="two-col-date">2014</div></div>
+      <div class="two-col"><div class="two-col-main">Three Critical Elements of Long-Term Storage in the Cloud, PASIG</div><div class="two-col-date">2014</div></div>
+      <div class="two-col"><div class="two-col-main">Census Data Tools, U.S. Census Training</div><div class="two-col-date">2013</div></div>
+      <div class="two-col"><div class="two-col-main">Nutrition Information Resources, NNLM South Central Region</div><div class="two-col-date">2013</div></div>
+      <div class="two-col"><div class="two-col-main">Adventures in International Librarianship, Libraries Thriving</div><div class="two-col-date">2013</div></div>
+      <div class="two-col"><div class="two-col-main">Super Searcher: Enhancing Your Online Search Super Powers, NNLM (4 MLA CE credits)</div><div class="two-col-date">2012</div></div>
+      <div class="two-col"><div class="two-col-main">Scuba Schools International, Open Water Diver</div><div class="two-col-date">2002</div></d
