@@ -1,38 +1,425 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  <link rel="stylesheet" href="https://alyngee.github.io/style1.css">
-<meta name="viewport" content="width=device-width, initial-scale="1.0"> 
-    
-<title>Alyn Gamble</title>
-	<header class="header">
-      <ul class="main-nav" align="center">
-    <li><a class="nav-link" href="https://alyngee.github.io/index.html" aria-current="page">Home</a></li>
-        <li><a class="nav-link" href="https://alyngee.github.io/teaching.html">Teaching</a></li>
-        <li><a class="nav-link" href="https://alyngee.github.io/research.html">Research</a></li>
-        <li><a class="nav-link" href="https://alyngee.github.io/vitae.html">Vitae</a></li>
-      </ul>
-	</header> 
-  </head>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Alyn Gamble — Academic Portfolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+  * { font-family: 'Atkinson Hyperlegible', Arial, sans-serif; }
+
+  :root {
+    --bg: #eef2ec;
+    --bg-dark: #d5e0d0;
+    --bg-card: #f4f8f2;
+    --nav-bg: #152a18;
+    --nav-accent: #3d6b42;
+    --text-primary: #111f13;
+    --text-muted: #3b5c40;
+    --accent: #2d5c32;
+    --accent-light: #6fa374;
+    --tag-bg: #cfe0cb;
+    --tag-border: #8fbb94;
+    --tag-text: #162d19;
+    --link: #1f5c3a;
+    --link-hover: #103324;
+    --focus-ring: 3px solid #1f5c3a;
+    --border: #b8cebc;
+    --section-gap: 4rem;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Atkinson Hyperlegible', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 17px;
+    line-height: 1.8;
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    background: var(--nav-bg);
+    color: #c8dfca;
+    padding: 0.5rem 1rem;
+    border-radius: 0 0 6px 6px;
+    font-size: 14px;
+    text-decoration: none;
+    z-index: 9999;
+  }
+  .skip-link:focus { top: 0; }
+
+  nav { background: var(--nav-bg); position: sticky; top: 0; z-index: 100; border-bottom: 2px solid var(--nav-accent); }
+  nav ul { display: flex; flex-wrap: wrap; list-style: none; max-width: 900px; margin: 0 auto; padding: 0 1rem; }
+  nav a { display: block; padding: 0.9rem 1.1rem; color: #c8dfca; text-decoration: none; font-size: 14px; letter-spacing: 0.04em; border-bottom: 2px solid transparent; transition: border-color 0.15s, color 0.15s; }
+  nav a:hover { color: #9ecba4; border-bottom-color: #9ecba4; }
+  nav a:focus-visible { outline: 3px solid #9ecba4; outline-offset: -3px; border-radius: 2px; }
+
+  main { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+
+  section { padding: var(--section-gap) 0; border-bottom: 1px solid var(--border); }
+  section:last-child { border-bottom: none; }
+
+  h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; line-height: 1.2; color: var(--text-primary); }
+  h2 { font-size: 1.6rem; font-weight: 700; color: var(--accent); margin-bottom: 1.5rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.3rem; }
+  p { margin-bottom: 1rem; color: var(--text-primary); }
+
+  .section-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; font-weight: 700; }
+
+  #about { display: block; }
+  .hero-text .tagline { font-style: italic; color: var(--text-muted); font-size: 1.05rem; margin: 0.5rem 0 1.5rem; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .tag { background: var(--tag-bg); color: var(--tag-text); font-size: 13px; padding: 3px 12px; border-radius: 20px; border: 1px solid var(--tag-border); font-weight: 400; }
+
+  .pub-list { list-style: none; }
+  .pub-item { padding: 1.25rem 0; border-bottom: 1px solid var(--border); }
+  .pub-item:first-child { padding-top: 0; }
+  .pub-item:last-child { border-bottom: none; }
+  .pub-meta { font-size: 13px; color: var(--text-muted); margin-bottom: 0.25rem; }
+  .pub-title { font-family: 'Atkinson Hyperlegible', Arial, sans-serif; font-weight: 700; font-size: 1rem; }
+  .pub-title a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; font-size: 1rem; font-weight: 700; font-family: 'Atkinson Hyperlegible', Arial, sans-serif; }
+  .pub-title a:hover { color: var(--link-hover); }
+  .pub-title a:focus-visible { outline: var(--focus-ring); border-radius: 2px; outline-offset: 2px; }
+  .pub-venue { font-size: 13px; color: var(--text-muted); font-style: italic; margin-top: 0.25rem; }
+
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; }
+  .research-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; border-top: 3px solid var(--accent); }
+  .research-card p { font-size: 14px; color: var(--text-muted); margin-bottom: 0; line-height: 1.6; }
+
+  .course-list { list-style: none; }
+  .course-item { display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+  .course-item:last-child { border-bottom: none; }
+  .course-level { font-size: 12px; background: var(--tag-bg); color: var(--tag-text); padding: 2px 10px; border-radius: 12px; white-space: nowrap; align-self: start; margin-top: 3px; border: 1px solid var(--tag-border); font-weight: 700; }
+  .course-item p { font-size: 14px; color: var(--text-muted); margin: 0.2rem 0 0; line-height: 1.5; }
+
+  .cv-block { margin-bottom: 2rem; }
+  .cv-entry { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; margin-bottom: 0.75rem; font-size: 15px; }
+  .cv-year { color: var(--text-muted); font-size: 13px; padding-top: 2px; }
+  .cv-detail strong { display: block; color: var(--text-primary); font-weight: 700; }
+  .cv-detail span { color: var(--text-muted); font-size: 13px; }
+
+  .cv-download { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--nav-bg); color: #c8dfca; padding: 0.6rem 1.3rem; border-radius: 4px; text-decoration: none; font-size: 14px; margin-top: 1.5rem; transition: background 0.15s; font-weight: 700; }
+  .cv-download:hover { background: var(--accent); }
+  .cv-download:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
+
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .contact-item { font-size: 15px; }
+  .contact-item dt { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.25rem; font-weight: 700; }
+  .contact-item dd a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
+  .contact-item dd a:focus-visible { outline: var(--focus-ring); border-radius: 2px; }
+
+  footer { text-align: center; padding: 2rem 1rem; font-size: 13px; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 2rem; }
+
+  @media (max-width: 600px) {
+    .cv-entry { grid-template-columns: 1fr; gap: 0.2rem; }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
 <body>
 
-<!-- This site was built using tutorials on w3schools.com and codepen.io. I hope it serves as an example of how a site can be built by a non-designer. -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <ul role="list">
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#teaching">Teaching</a></li>
+    <li><a href="#cv">CV</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
 <main id="main-content">
-  <section>
-    <div class="container flow">
-      <h1>Welcome!</h1>
-      <p>This is the personal website of <a href="https://scholar.google.com/citations?user=1xDkhaEAAAAJ&hl=en&oi=ao">Dr. Alyn Gamble</a>, an information professional and educator based in Boston, Massachusetts. I am non-binary and use <a href="https://apastyle.apa.org/style-grammar-guidelines/grammar/singular-they"> they series pronouns</a>. On this site, I hope to gather some of my experiences into a fully accessible format. Please let me know if you notice any errors or have any questions.
-      </p>
-      <p>
-Currently, I am the STEM Librarian at Northeastern University, an affiliated faculty member in the Writing, Literature, and Publishing Department at Emerson College, and an adjunct professor in the School of Library and Information Science at Simmons University. My professional background includes work in digital publishing, information literacy, and scholarly communications, as well as developing digital repositories. I've also conducted research and provided instruction in artificial intelligence, digital humanities, and research data management. In my current research, I focus on oral histories of sexual and gender minority individuals pursuing remission from substance use disorder.
-      </p>
-When away from screens and classrooms, I enjoy noncompetitive running, wildlife photography, performing improv comedy, reading, and attending concerts and theatrical productions.
-      </p>
-<p>
-Thank you for visiting this digital introduction. Please e-mail me (alynreads at pm dot me) if you want to learn more. </p>
+
+  <section id="about" aria-labelledby="about-heading">
+    <div class="hero-text">
+      <p class="section-label" aria-hidden="true">Information Professional · Educator</p>
+      <h1 id="about-heading">Dr. Alyn Gamble <span style="font-size: 1rem; font-weight: 400;"><a href="https://apastyle.apa.org/style-grammar-guidelines/grammar/singular-they" style="color: var(--link); text-decoration: underline; text-underline-offset: 3px;">(they/them)</a></span></h1>
+      <p class="tagline">STEM Librarian, Northeastern University<br>Affiliate Faculty, Emerson College<br>Adjunct Professor, Simmons University</p>
+      <p>As a librarian and professor, I work at the intersections of information literacy and information behavior. My research bridges health narratives, information science, and emerging technologies, with a commitment to underserved communities. Ultimately, I seek to empower people to explore their experiences and help change systems that represent them.</p>
+      <p>When away from screens and classrooms, I enjoy noncompetitive running, wildlife photography, and performing improv comedy.</p>
+
+  </section>
+
+  <section id="research" aria-labelledby="research-heading">
+    <p class="section-label" aria-hidden="true">Current &amp; past projects</p>
+    <h2 id="research-heading">Research &amp; Projects</h2>
+    <div class="card-grid" role="list">
+      <article class="research-card" role="listitem">
+        <h3>A Great Place to Meet (current)</h3>
+        <p>A book-length collection of oral histories from participants at a twelve-step program clubhouse devoted to the LGBTQIA+ community, sharing a glimpse into a mutual healing journey.</p>
+      </article>
+      <article class="research-card" role="listitem">
+        <h3>AI and Mental Health</h3>
+        <p>A social informatics project on the use of artificial intelligence in mobile mental healthcare applications, with a focus on privacy and chatbots.</p>
+      </article>
+      <article class="research-card" role="listitem">
+        <h3>Digital Publishing</h3>
+        <p>Development of open access research journals and an educational blog. Teaching undergraduate and graduate students essentials for publishing careers, and guiding students and researchers through the scholarly publishing landscape.</p>
+      </article>
+      <article class="research-card" role="listitem">
+        <h3>Library Retrospectives</h3>
+        <p>Historical perspectives on issues in LIS, including the classification of mental health information, library support for marine biomedical research, and historical LIS research.</p>
+      </article>
     </div>
   </section>
-</main>
 
-</body>
-</html>
+  <section id="publications" aria-labelledby="pubs-heading">
+    <p class="section-label" aria-hidden="true">Scholarly work</p>
+    <h2 id="pubs-heading">Publications</h2>
+    <ul class="pub-list" role="list">
+      <li class="pub-item">
+        <p class="pub-meta">Dissertation · 2024</p>
+        <p class="pub-title"><a href="https://repository.library.northeastern.edu/files/neu:h989t364h" aria-label="View dissertation: A Great Place to Meet">"A Great Place to Meet": Oral Histories of Sexual and Gender Minority Members of a Twelve-Step Program Clubhouse</a></p>
+        <p class="pub-venue">Simmons University</p>
+      </li>
+      <li class="pub-item">
+        <p class="pub-meta">Journal article · 2023</p>
+        <p class="pub-title"><a href="https://www.iastatedigitalpress.com/joerhe/article/id/17736/" aria-label="View article: OER by Any Other Name">"OER by Any Other Name: Results From A Faculty Listening Tour At A Mid-Sized Research University"</a></p>
+        <p class="pub-venue">Schuler, A., &amp; Gamble, A. — <em>Journal of Open Educational Resources in Higher Education</em> 2(1), 80–95</p>
+      </li>
+      <li class="pub-item">
+        <p class="pub-meta">OER · 2023</p>
+        <p class="pub-title"><a href="https://oercommons.org/courseware/lesson/108162/overview" aria-label="View OER: Making a Website Using GitHub Pages">"Making a Website Using GitHub Pages"</a></p>
+        <p class="pub-venue"><em>OER Commons</em></p>
+      </li>
+      <li class="pub-item">
+        <p class="pub-meta">Book chapter · 2023</p>
+        <p class="pub-title">"And What We Would Have Been If We Were in the Stacks?"</p>
+        <p class="pub-venue">In K. Adolpho, S. G. Krueger, &amp; K. McCracken (Eds.), <em>Trans and gender diverse voices in libraries.</em> Litwin Books</p>
+      </li>
+      <li class="pub-item">
+        <p class="pub-meta">Book review · 2022</p>
+        <p class="pub-title">"LIS Interrupted: Intersections of Mental Health and Library Work"</p>
+        <p class="pub-venue">Gamble, A. — <em>Education for Information, 1</em>(1–2)</p>
+      </li>
+      <li class="pub-item">
+        <p class="pub-meta">Journal article · 2020</p>
+        <p class="pub-title">"Artificial Intelligence and Mobile Apps for Mental Healthcare: A Social Informatics Perspective"</p>
+        <p class="pub-venue">Gamble, A. — <em>Aslib Journal of Information Management</em> 72(4)</p>
+      </li>
+      <li class="pub-item">
+        <p class="pub-meta">OER · 2020</p>
+        <p class="pub-title"><a href="https://osf.io/hnvqe/overview" aria-label="View OER: Cupper & leecher, tinman & shrimp fiend">"Cupper &amp; Leecher, Tinman &amp; Shrimp Fiend: Data Science Tools for Examining Historical Occupation Data"</a></p>
+        <p class="pub-venue">Gamble, A., &amp; Boyd, K. — Open Science Framework</p>
+      </li>
+      <li class="pub-item">
+        <p class="pub-meta">Journal article · 2019</p>
+        <p class="pub-title">"Ullmann's Encyclopedia of Industrial Chemistry"</p>
+        <p class="pub-venue">Gamble, A. — <em>The Charleston Advisor, 20</em>(4), 46–50</p>
+      </li>
+      <li class="pub-item">
+        <p class="pub-meta">Conference proceedings · 2019</p>
+        <p class="pub-title">"Participatory Development of an Open Source Broadband Measurement Platform for Public Libraries"</p>
+        <p class="pub-venue">Rhinesmith, C., Ritzo, C., Bullen, G., Werle, J., &amp; Gamble, A. — In <em>International Conference on Information</em> (pp. 274–279)</p>
+      </li>
+      <li class="pub-item">
+        <p class="pub-meta">Conference proceedings · 2018</p>
+        <p class="pub-title"><a href="https://doi.org/10.1002/pra2.2018.14505501082" aria-label="View: Digital Liaisons">"Digital Liaisons: Connecting Diverse Voices to Support an Ethical and Sustainable Information Future in Digital Libraries"</a></p>
+        <p class="pub-venue">Grguric, E., Khan, N., Gamble, A., Hockin, T., &amp; Dressler, V. — In L. Freund (Ed.), <em>Proceedings of the Association for Information Science and Technology</em> (pp. 688–690). Wiley</p>
+      </li>
+      <li class="pub-item">
+        <p class="pub-meta">Book chapter · 2017</p>
+        <p class="pub-title">"Harnessing the Winds: Collaboration and the Aeolus Research Journal"</p>
+        <p class="pub-venue">Gamble, A., Kallaher, A., Lacey, N., Maass, A., Ralph, C., Ryba, T., &amp; Tanaka, M. — In M. K. Hensley &amp; S. Davis-Kahl (Eds.), <em>Undergraduate research and the academic librarian: Case studies and best practices.</em> ACRL</p>
+      </li>
+      <li class="pub-item">
+        <p class="pub-meta">Journal article · 2017</p>
+        <p class="pub-title">"Wolfram Language for Teaching Computational Thinking to K-12 Learners"</p>
+        <p class="pub-venue">Gamble, A. — <em>International Journal of People-Oriented Programming</em> 6(1)</p>
+      </li>
+      <li class="pub-item">
+        <p class="pub-meta">Journal article · 2017</p>
+        <p class="pub-title">"GIS and the Humanities: Presenting a Path to Digital Scholarship with the Story Map App"</p>
+        <p class="pub-venue">Kallaher, A. &amp; Gamble, A. — <em>College &amp; Undergraduate Research Libraries</em> 24(2–4), 559–573</p>
+      </li>
+      <li class="pub-item">
+        <p class="pub-meta">Book chapter · 2017</p>
+        <p class="pub-title">"From Potato Chips to Vegetables: Embedded Instruction in a General Biology Classroom"</p>
+        <p class="pub-venue">Gamble, A. &amp; Race, T. — In R. Pun &amp; M. Houlihan (Eds.), <em>The first year experience library cookbook.</em> ACRL</p>
+      </li>
+      <li class="pub-item">
+        <p class="pub-meta">OER · 2016</p>
+        <p class="pub-title"><a href="https://osf.io/8wwgj/overview" aria-label="View OER: The Power of Story Maps">"The Power of Story Maps: Learn How to Use ArcGIS and Story Maps for Digital Humanities"</a></p>
+        <p class="pub-venue">Gamble, A., &amp; Kallaher, A. — Open Science Framework</p>
+      </li>
+      <li class="pub-item">
+        <p class="pub-meta">Conference proceedings · 2016</p>
+        <p class="pub-title">"As Necessary as Water: Information Science in Marine Biomedical Research"</p>
+        <p class="pub-venue">In D. Barr (Ed.), <em>Blue growth: Motivating innovations in aquatic information management: Proceedings of the 41st IAMSLIC Conference, Rome, Italy</em> (pp. 96–101)</p>
+      </li>
+    </ul>
+  </section>
+
+  <section id="teaching" aria-labelledby="teaching-heading">
+    <p class="section-label" aria-hidden="true">Teaching philosophy</p>
+    <h2 id="teaching-heading">Teaching</h2>
+
+    <blockquote style="font-style: italic; font-size: 1.05rem; line-height: 1.7; color: var(--text-muted); padding-left: 1.25rem; border-left: 2px solid var(--border); margin-bottom: 2rem;">
+      "Study nature, not books."
+      <cite style="display: block; font-style: normal; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-light); margin-top: 0.5rem;">— Louis Agassiz, as displayed at the Woods Hole Oceanographic Institution Library</cite>
+    </blockquote>
+
+    <div style="margin-bottom: 2rem;">
+      <p class="section-label" aria-hidden="true">On teaching</p>
+      <p>When first encountering Agassiz's adage, I thought his view was antithetical to my pedagogy. But as I began teaching students and researchers within a library, then moved into more formal instruction as a faculty member, his statement became central to my own practice. While reading can teach us a great deal — including empathy — actively working in a field leads to experience and knowledge. Though I incorporate Agassiz's idea into my pedagogy, it is through education that I seek to dismantle the white supremacist perspective with which he evaluated the world.</p>
+    </div>
+
+    <div class="card-grid" role="list" style="margin-bottom: 2rem;">
+      <div class="research-card" role="listitem">
+        <p style="font-size: 11px; color: var(--accent-light); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; font-weight: 700;">01</p>
+        <p style="font-size: 15px; font-style: italic; color: var(--text-primary); margin: 0; line-height: 1.5;">Education as a collaborative ecosystem</p>
+      </div>
+      <div class="research-card" role="listitem">
+        <p style="font-size: 11px; color: var(--accent-light); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; font-weight: 700;">02</p>
+        <p style="font-size: 15px; font-style: italic; color: var(--text-primary); margin: 0; line-height: 1.5;">Reflective thinking over rote learning</p>
+      </div>
+      <div class="research-card" role="listitem">
+        <p style="font-size: 11px; color: var(--accent-light); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; font-weight: 700;">03</p>
+        <p style="font-size: 15px; font-style: italic; color: var(--text-primary); margin: 0; line-height: 1.5;">Mastery, not comparison with peers</p>
+      </div>
+      <div class="research-card" role="listitem">
+        <p style="font-size: 11px; color: var(--accent-light); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; font-weight: 700;">04</p>
+        <p style="font-size: 15px; font-style: italic; color: var(--text-primary); margin: 0; line-height: 1.5;">Accessibility as a foundational principle</p>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 2rem;">
+      <p class="section-label" aria-hidden="true">Philosophy</p>
+      <p>My teaching philosophy is holistic. I view education as an ecosystem, with teaching and learning inexorably intertwined. I teach in order to help students mature via meaningful experiences as individuals in service to the world — developing reflective thinking that allows them to critically engage with information and become empathetic contributors to the global conversation. Likewise, I believe teachers must remain open to learning opportunities while advancing scholarship. Education is, at its heart, a collaborative operation.</p>
+    </div>
+
+    <div style="margin-bottom: 2rem;">
+      <p class="section-label" aria-hidden="true">Assessment</p>
+      <p>Students gain a great deal from evaluating and assessing their own work, as well as the work performed by their peers and instructor. For this reason, I ask students to write anonymous evaluations for themselves, their classmates, and myself — encouraging honest feedback and allowing me to tailor the course to address knowledge gaps while giving students space to explore their own interests. When assessing students, I focus on their mastery of a topic rather than comparison with other learners, assessing at the beginning, throughout, and summatively at the conclusion of each educational endeavor.</p>
+    </div>
+
+    <div style="margin-bottom: 2rem;">
+      <p class="section-label" aria-hidden="true">Accessibility &amp; inclusion</p>
+      <p>I first make sure students know their well-being is paramount, encouraging them to reach out with any accommodations they need — whether or not formally documented. I work with student accessibility services, educational technology, and information literacy professionals to ensure access to support. Where possible, I flip the classroom, allowing digital elements to give students background information they can then use in face-to-face discussions. I aim to create an inclusive environment where students feel comfortable acknowledging their needs and empowered in their learning.</p>
+    </div>
+
+    <div>
+      <p class="section-label" aria-hidden="true">Growth</p>
+      <p>Just as my students are on a lifelong journey of learning and growth, so am I. As my experiential and scholarly knowledge continues to develop, so shall my teaching philosophy. My pedagogical practices are grounded in the holistic environment of an educational ecosystem where students and instructors share the experience of active learning — creating a better-educated population of professionals who can critically reason and demonstrate their skills in ways that impact them far beyond their time in my classroom.</p>
+    </div>
+  </section>
+
+  <section id="cv" aria-labelledby="cv-heading">
+    <p class="section-label" aria-hidden="true">Academic record</p>
+    <h2 id="cv-heading">Curriculum Vitae</h2>
+    <div class="cv-block">
+      <h3>Education</h3>
+      <dl>
+        <div class="cv-entry">
+          <dt class="cv-year">2024</dt>
+          <dd class="cv-detail"><strong>PhD, Library and Information Science</strong><span>Simmons University</span></dd>
+        </div>
+        <div class="cv-entry">
+          <dt class="cv-year">2013</dt>
+          <dd class="cv-detail"><strong>Master of Library and Information Science</strong><span>Louisiana State University</span></dd>
+        </div>
+        <div class="cv-entry">
+          <dt class="cv-year">2011</dt>
+          <dd class="cv-detail"><strong>Master of Liberal Arts</strong><span>Tulane University</span></dd>
+        </div>
+        <div class="cv-entry">
+          <dt class="cv-year">2008</dt>
+          <dd class="cv-detail"><strong>Bachelor of Arts, <em>cum laude</em></strong><span>Spring Hill College</span></dd>
+        </div>
+      </dl>
+    </div>
+    <div class="cv-block">
+      <h3>Positions held</h3>
+      <dl>
+        <div class="cv-entry">
+          <dt class="cv-year">2023–present</dt>
+          <dd class="cv-detail"><strong>STEM Librarian</strong><span>Northeastern University</span></dd>
+        </div>
+        <div class="cv-entry">
+          <dt class="cv-year">2025–present</dt>
+          <dd class="cv-detail"><strong>Adjunct Faculty, School of Library and Information Science</strong><span>Simmons University</span></dd>
+        </div>
+        <div class="cv-entry">
+          <dt class="cv-year">2020–present</dt>
+          <dd class="cv-detail"><strong>Affiliate Faculty, Dept. of Writing, Literature and Publishing</strong><span>Emerson College</span></dd>
+        </div>
+        <div class="cv-entry">
+          <dt class="cv-year">2020–2023</dt>
+          <dd class="cv-detail"><strong>Research Librarian for the Sciences, Tisch Library</strong><span>Tufts University</span></dd>
+        </div>
+        <div class="cv-entry">
+          <dt class="cv-year">2018–2020</dt>
+          <dd class="cv-detail"><strong>Research Associate, Harvard Data Science Review</strong><span>Harvard University</span></dd>
+        </div>
+        <div class="cv-entry">
+          <dt class="cv-year">2018</dt>
+          <dd class="cv-detail"><strong>Data Fellow, Research Data Management Librarian Academy (RDMLA) Program</strong><span>Elsevier</span></dd>
+        </div>
+        <div class="cv-entry">
+          <dt class="cv-year">2017</dt>
+          <dd class="cv-detail"><strong>Research Assistant, Library &amp; Information Science Research</strong><span>Simmons University</span></dd>
+        </div>
+        <div class="cv-entry">
+          <dt class="cv-year">2016–2017</dt>
+          <dd class="cv-detail"><strong>Blog Editor, Education Technologies</strong><span>Wolfram Research</span></dd>
+        </div>
+        <div class="cv-entry">
+          <dt class="cv-year">2015–2017</dt>
+          <dd class="cv-detail"><strong>Assistant Librarian, Sciences, Jane Bancroft Cook Library</strong><span>New College of Florida and University of South Florida Sarasota-Manatee</span></dd>
+        </div>
+        <div class="cv-entry">
+          <dt class="cv-year">2014–2015</dt>
+          <dd class="cv-detail"><strong>Librarian</strong><span>Mote Marine Laboratory and Aquarium</span></dd>
+        </div>
+        <div class="cv-entry">
+          <dt class="cv-year">2011–2013</dt>
+          <dd class="cv-detail"><strong>Library Technician</strong><span>Tulane University</span></dd>
+        </div>
+        <div class="cv-entry">
+          <dt class="cv-year">2010–2011</dt>
+          <dd class="cv-detail"><strong>Research Help Desk Student Assistant</strong><span>Tulane University</span></dd>
+        </div>
+        <div class="cv-entry">
+          <dt class="cv-year">2007–2009</dt>
+          <dd class="cv-detail"><strong>Literary Manager</strong><span>Bienville Books</span></dd>
+        </div>
+        <div class="cv-entry">
+          <dt class="cv-year">2006–2008</dt>
+          <dd class="cv-detail"><strong>Library Support Specialist</strong><span>Spring Hill College</span></dd>
+        </div>
+      </dl>
+    </div>
+    <a href="https://alyngee.github.io/GambleAlyn-CV.html" class="cv-download" aria-label="View full CV">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
+        <path d="M8 12l-4-4h2.5V3h3v5H12L8 12z"/>
+        <rect x="2" y="13" width="12" height="1.5" rx="0.75"/>
+      </svg>
+      View full CV
+    </a>
+  </section>
+
+  <section id="contact" aria-labelledby="contact-heading">
+    <p class="section-label" aria-hidden="true">Get in touch</p>
+    <h2 id="contact-heading">Contact</h2>
+    <dl class="contact-grid">
+      <div class="contact-item">
+        <dt>Email</dt>
+        <dd><a href="/cdn-cgi/l/email-protection#a1c0cdd8cfd3c4c0c5d2e1c6ccc0c8cd8fc2cecc"><span class="__cf_email__" data-cfemail="3b5a574255495e5a5f487b5c565a525715585456">[email&#160;protected]</span></a></dd>
+      </div>
+      <div class="contact-item">
+        <dt>Academic profiles</dt>
+        <dd>
+          <a href="https://orcid.org/0000-0001-8583-6218" aria-label="View ORCID profile">ORCID</a> ·
+          <a href="https://scholar.google.com/citations?user=1xDkhaEAAAAJ" aria-label="View Google Scholar profile">Google Scholar</a>
+        </dd>
+   
