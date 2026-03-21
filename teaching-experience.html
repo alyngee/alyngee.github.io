@@ -1,40 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  <link rel="stylesheet" href="https://alyngee.github.io/style1.css">
-<meta name="viewport" content="width=device-width, initial-scale="1.0">    
-<title>Teaching Experience</title>
-	<header class="header">
-      <ul class="main-nav">
-    <li><a class="nav-link" href="https://alyngee.github.io/index.html">Home</a></li>
-        <li><a class="nav-link" href="https://alyngee.github.io/teaching.html" aria-current="page">Teaching</a></li>
-        <li><a class="nav-link" href="https://alyngee.github.io/research.html">Research</a></li>
-        <li><a class="nav-link" href="https://alyngee.github.io/vitae.html">Vitae</a></li>
-      </ul>
-	</header> 
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses Taught — Alyn Gamble</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #111110;
+      --ink2: #444441;
+      --ink3: #888780;
+      --rule: #d3d1c7;
+      --page: #ffffff;
+      --sans: 'Atkinson Hyperlegible', Arial, sans-serif;
+      --serif: 'Georgia', 'Times New Roman', serif;
+      --mono: 'Courier New', monospace;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink: #e8e6e0;
+        --ink2: #b4b2a9;
+        --ink3: #888780;
+        --rule: #444441;
+        --page: #18181a;
+      }
+    }
+
+    body {
+      font-family: var(--sans);
+      font-size: 11pt;
+      line-height: 1.5;
+      color: var(--ink);
+      background: var(--page);
+      padding: 2rem 1.5rem;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { padding: 0; font-size: 10pt; }
+      .no-print { display: none; }
+      section { break-inside: avoid; }
+      h2 { break-after: avoid; }
+    }
+
+    /* ── Layout ── */
+    .cv-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* ── Header ── */
+    .cv-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .cv-name {
+      font-family: var(--sans);
+      font-size: 22pt;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .cv-contact {
+      font-size: 9.5pt;
+      color: var(--ink2);
+      line-height: 1.8;
+    }
+
+    .cv-contact a {
+      color: var(--ink2);
+      text-decoration: none;
+    }
+
+    .cv-contact a:hover,
+    .cv-contact a:focus {
+      text-decoration: underline;
+      color: var(--ink);
+    }
+
+    /* ── Section headings ── */
+    section {
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-family: var(--sans);
+      font-size: 11pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 2px;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── CV entries ── */
+    .cv-entry {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      column-gap: 1rem;
+      margin-bottom: 0.6rem;
+      align-items: start;
+    }
+
+    .cv-entry-main {
+      grid-column: 1;
+    }
+
+    .cv-entry-date {
+      grid-column: 2;
+      font-size: 10pt;
+      color: var(--ink2);
+      white-space: nowrap;
+      text-align: right;
+      padding-top: 0.05rem;
+    }
+
+    .cv-role {
+      font-weight: bold;
+    }
+
+    .cv-org {
+      font-style: italic;
+    }
+
+    .cv-detail {
+      font-size: 10pt;
+      color: var(--ink2);
+      margin-top: 0.1rem;
+    }
+
+    /* ── Skip nav ── */
+    .skip-nav {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--ink);
+      color: var(--page);
+      padding: 6px 12px;
+      font-size: 10pt;
+      text-decoration: none;
+      border-radius: 0 0 4px 0;
+      z-index: 100;
+    }
+
+    .skip-nav:focus {
+      top: 0;
+    }
+
+    /* ── Print tip ── */
+    .print-tip {
+      text-align: center;
+      font-size: 9pt;
+      color: var(--ink3);
+      margin-bottom: 1.5rem;
+    }
+
+    .print-tip button {
+      font-size: 9pt;
+      font-family: var(--sans);
+      color: var(--ink2);
+      background: none;
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 3px 10px;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+
+    .print-tip button:hover { border-color: var(--ink3); }
+  </style>
+</head>
 <body>
-	  <!-- This site was built using tutorials on w3schools.com and codepen.io. I hope it serves as an example of how a site can be built by a non-designer. -->
-<h1>Teaching Experience</h1>
-Last updated July 19, 2025
- <h2>Current</h2>
-   <p><i>Graduate-level</i><br>
-Digital Publishing Essentials, Emerson College<br>
-Information Services, Behaviors and Ethics, Simmons University<br>
-   <h2>Past</h2>
-   <p><i>Graduate-level</i><br>
-Chairperson, Master's Project ("Disruptive Publishing: Urgency, Action, and the Zine"), Emerson College<br>
-Chairperson, Master's Thesis ("'Leave ‘em right where they are': A critical analysis of Black BookTok’s deployment of digital Black feminist praxis and Black feminist literacies in the #readingispolitical discourse"), Emerson College<br>
-Reader, Senior Capstone ("I Love Being Scared, and Suprisingly So Do You"), Emerson College<br>
-Supervisor, Directed Study (“Symbiosis”), Emerson College<br>
-Instructor, Metadata, Emerson College<br>
-Instructor, Digital Publishing, Emerson College<br>
-Instructor, Current Issues in Publishing, Emerson College<br>
-Teaching Assistant, Information Services for Diverse Users, Simmons University<br>
-Teaaching Assistant, User Instruction, Simmons University</p>
-   <p><i>Undergraduate-level</i><br>
-Instructor, Aeolus Research Journal, New College of Florida<br>
-Instructor, Sex, Death, and Comic Books: STEM-ulating Writing, New College of Florida<br>
-Intructor, Interdisciplinary Research Methods, New College of Florida<br>
-Supervisor, Library Internship, Mote Marine Laboratory and Aquarium</p>
+
+<a class="skip-nav" href="#main-content">Skip to main content</a>
+
+<div class="cv-wrap">
+
+  <header class="cv-header" role="banner">
+    <h1 class="cv-name">Teaching Experience</h1>
+  </header>
+
+  <main id="main-content">
+
+    <!-- EMERSON COLLEGE -->
+    <section aria-labelledby="emerson-heading">
+      <h2 id="emerson-heading">Emerson College</h2>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">PB 698 Master&#x2019;s Project<span style="font-weight:normal">, Chairperson</span></div>
+          <div class="cv-detail">&bull; <em>Disruptive Publishing: Urgency, Action, and the Zine</em></div>
+          <div class="cv-detail">&bull; <em>&#x2018;Leave &#x2018;em right where they are&#x2019;: A critical analysis of Black BookTok&#x2019;s deployment of digital Black feminist praxis and Black feminist literacies in the #readingispolitical discourse</em></div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">PB 697 Directed Study<span style="font-weight:normal">, Supervisor</span></div>
+          <div class="cv-detail"><em>Symbiosis: Print and Digital Media in the Age of AI</em></div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">PB 692 Digital Publishing Essentials</div>
+          <div class="cv-org">Comprehensive overview of digital publishing formats, platforms, and channels</div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">PB 620 Metadata</div>
+          <div class="cv-org">Explores metadata schemes and models across publishing industries</div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">PB 204 Current Issues in Publishing</div>
+          <div class="cv-org">Foundations, history, and issues in publishing and media</div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">PB 203 Digital Publishing</div>
+          <div class="cv-org">Survey of digital publishing formats, platforms, and channels</div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">MI 490 Senior Seminar: Capstone in Interdisciplinary Studies<span style="font-weight:normal">, Reader</span></div>
+          <div class="cv-detail"><em>I Love Being Scared, and Surprisingly So Do You</em></div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SIMMONS UNIVERSITY -->
+    <section aria-labelledby="simmons-heading">
+      <h2 id="simmons-heading">Simmons University</h2>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">LIS 407 Information Service, Behaviors &amp; Ethics</div>
+          <div class="cv-org">Introduction to core information services and concepts</div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">LIS 410 Information Services for Diverse Users<span style="font-weight:normal">, Teaching Assistant</span></div>
+          <div class="cv-org">Examination of inclusive services to meet the information needs of underrepresented groups</div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">LIS 408 User Instruction &amp; Information Literacy<span style="font-weight:normal">, Teaching Assistant</span></div>
+          <div class="cv-org">Survey of user instruction and learning assessment across information settings</div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- NEW COLLEGE OF FLORIDA -->
+    <section aria-labelledby="ncf-heading">
+      <h2 id="ncf-heading">New College of Florida</h2>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Aeolus Research Journal</div>
+          <div class="cv-org">Development and operation of an interdisciplinary undergraduate research journal</div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Sex, Death, and Comic Books: STEM-ulating Writing</div>
+          <div class="cv-org">Principles and practices of science writing for multiple audiences</div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Interdisciplinary Research Methods</div>
+          <div class="cv-org">Foundational scholarly research for the thesis <em>Coping with Captivity: Stereotypies in Zoo Animals</em></div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- MOTE MARINE LABORATORY AND AQUARIUM -->
+    <section aria-labelledby="mote-heading">
+      <h2 id="mote-heading">Mote Marine Laboratory and Aquarium</h2>
+
+      <div class="cv-entry">
+        <div class="cv-entry-main">
+          <div class="cv-role">Library Internship<span style="font-weight:normal">, Supervisor</span></div>
+          <div class="cv-detail">&bull; <em>Coastal Commitment: An Oral History of Volunteers at Mote Marine Laboratory and Aquarium</em></div>
+          <div class="cv-detail">&bull; <em>Archives of Dr. Eugenie Clark</em></div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+<script>
+  // Restore print button focus after print dialog
+  window.onafterprint = function() { document.activeElement?.blur(); };
+</script>
+
+</body>
 </html>
